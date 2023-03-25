@@ -1,5 +1,5 @@
 package org.MyApp;
 
-public enum OperationType {
+enum operationType {
     ADDITION,MULTIPLICATION,DIVISION,SUSBSTRACTION
 }
