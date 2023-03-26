@@ -3,20 +3,17 @@ package org.MyApp;
 import java.io.IOException;
 import java.util.*;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.StringUtils.*;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.commons.lang3.math.NumberUtils.*;
+
 
 public class Main  {
     private static boolean go;
-    Integrals integral = new Integrals();
 
 
     public static void main(String[] args) throws IOException{
         System.out.println("Welcome to my first calc!");
         System.out.println("To use it: enter your expression in 'a' 'operator' 'b' format");
-        System.out.println("You can use arabic or roman style numbers, but not simultanoiusly.");
+        System.out.println("You can use arabic or roman style numbers, but not simultaneously.");
         System.out.println("To exit applet enter 'exit'");
         go = true;
         while (go) {
@@ -27,9 +24,10 @@ public class Main  {
     public static void calc() throws IOException {
         String scannedString = StringFromConsole();
         String[] parsedStrings = StringParser(scannedString);
-        System.out.println("You have entered: " + scannedString);
-        if (CheckMemberType(parsedStrings[0])==memberType.NUMERIC) {
-            Integrals.CalculacteInts(parsedStrings);
+        if (CheckMemberType(parsedStrings[0])==memberType.NUMERIC && CheckMemberType(parsedStrings[2])==memberType.NUMERIC) {
+            IntNumbers.CalculateInts(parsedStrings);
+        } else if (CheckMemberType(parsedStrings[0])==memberType.ROMA && CheckMemberType(parsedStrings[2])==memberType.ROMA) {
+            RomanNumbers.CalculateRomans(parsedStrings);
         }
     }
 
@@ -70,30 +68,26 @@ public class Main  {
             return memberType.ROMA;
         }
     }
+
     public static operationType OperationType(String inputString) throws IOException {
-        switch (inputString) {
-            case "+":
-                return operationType.ADDITION;
-            case "-":
-                return operationType.SUSBSTRACTION;
-            case "*":
-                return operationType.MULTIPLICATION;
-            case "/":
-                return operationType.DIVISION;
-            default:
-                throw new IOException("Operation could not be recognised!");
-        }
+        return switch (inputString) {
+            case "+" -> operationType.ADDITION;
+            case "-" -> operationType.SUSBSTRACTION;
+            case "*" -> operationType.MULTIPLICATION;
+            case "/" -> operationType.DIVISION;
+            default -> throw new IOException("Operation could not be recognised!");
+        };
     }
     public static Boolean isOperation(String inputStringIsOperation) {
-        if (("+".equals(inputStringIsOperation))|("-".equals(inputStringIsOperation))|("/".equals(inputStringIsOperation))|("*".equals(inputStringIsOperation))) {
-            return true;
-        } else {return false;}
+        return ("+".equals(inputStringIsOperation)) | ("-".equals(inputStringIsOperation)) | ("/".equals(inputStringIsOperation)) | ("*".equals(inputStringIsOperation));
     }
 
+    /*
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+     */
 
 
 }

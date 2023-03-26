@@ -1,17 +1,15 @@
 package org.MyApp;
 
-import jdk.dynalink.Operation;
-
 import java.io.IOException;
 
 import static org.apache.commons.lang3.math.NumberUtils.*;
 
-class Integrals {
-    public static void CalculacteInts(String[] inputStrings) throws IOException {
+class IntNumbers {
+    public static void CalculateInts(String[] inputStrings) throws IOException {
         int firstMember =  toInt(inputStrings[0]);
-        if ( !(0<= firstMember &&  firstMember < 10 )) {throw new IOException("First Member is not in the [0:10] diapason!");}
+        if ( !(0<= firstMember &&  firstMember <= 10 )) {throw new IOException("First Member is not in the [0:10] diapason!");}
         int secondMember = toInt(inputStrings[2]);
-        if ( !(0<= secondMember && secondMember < 10)) {throw new IOException("Second Member is not in the [0:10] diapason!");}
+        if ( !(0<= secondMember && secondMember <= 10)) {throw new IOException("Second Member is not in the [0:10] diapason!");}
         try {
             operationType IntOperation = Main.OperationType(inputStrings[1]);
             MathHandler(firstMember,secondMember, IntOperation);
